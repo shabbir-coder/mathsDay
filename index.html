@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Solar System with Rocket</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    canvas {
+      display: block;
+    }
+    button {
+      position: absolute;
+      bottom: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #planetInfo {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <button id="nextButton">Next</button>
+  <div id="planetInfo">
+    <h2 id="planetName"></h2>
+    <ul id="planetSpecs"></ul>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    // Scene, Camera, and Renderer
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // Sun
+    const sunGeometry = new THREE.SphereGeometry(1.5, 32, 32);
+    const sunMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 }); // Yellow for the Sun
+    const sun = new THREE.Mesh(sunGeometry, sunMaterial);
+    scene.add(sun);
+
+    // Planet Data: [name, size, distance from Sun, color, and additional specs]
+    const planetData = [
+      { name: "Mercury", size: 0.4, distance: 2.5, color: 0xbebebe, specs: ["Radius: 2,439.7 km", "Orbital Period: 88 days", "Distance from Sun: 57.91 million km"] },
+      { name: "Venus", size: 0.9, distance: 4, color: 0xffcc00, specs: ["Radius: 6,051.8 km", "Orbital Period: 225 days", "Distance from Sun: 108.2 million km"] },
+      { name: "Earth", size: 1, distance: 5.5, color: 0x0000ff, specs: ["Radius: 6,371 km", "Orbital Period: 365.25 days", "Distance from Sun: 149.6 million km"] },
+      { name: "Mars", size: 0.53, distance: 7, color: 0xff4500, specs: ["Radius: 3,389.5 km", "Orbital Period: 687 days", "Distance from Sun: 227.9 million km"] },
+      { name: "Jupiter", size: 1.8, distance: 8.5, color: 0xffa500, specs: ["Radius: 69,911 km", "Orbital Period: 12 years", "Distance from Sun: 778.3 million km"] },
+      { name: "Saturn", size: 1.5, distance: 10, color: 0xf5deb3, specs: ["Radius: 58,232 km", "Orbital Period: 29.5 years", "Distance from Sun: 1.429 billion km"] },
+      { name: "Uranus", size: 1.2, distance: 11.5, color: 0x87ceeb, specs: ["Radius: 25,362 km", "Orbital Period: 84 years", "Distance from Sun: 2.871 billion km"] },
+      { name: "Neptune", size: 1.1, distance: 13, color: 0x00008b, specs: ["Radius: 24,622 km", "Orbital Period: 165 years", "Distance from Sun: 4.495 billion km"] },
+      { name: "Pluto", size: 0.2, distance: 14.5, color: 0x996633, specs: ["Radius: 1,188.3 km", "Orbital Period: 248 years", "Distance from Sun: 5.9 billion km"] }
+    ];
+
+    const planets = [];
+    const orbits = [];
+
+    // Add Planets and Orbits
+    planetData.forEach((planet, index) => {
+      // Create Planet
+      const planetGeometry = new THREE.SphereGeometry(planet.size, 32, 32);
+      const planetMaterial = new THREE.MeshBasicMaterial({ color: planet.color });
+      const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
+      planetMesh.position.x = planet.distance;
+      planets.push({ mesh: planetMesh, distance: planet.distance });
+      scene.add(planetMesh);
+
+      // Add Rings for Saturn
+      if (planet.name === "Saturn") {
+        const ringGeometry = new THREE.RingGeometry(planet.size + 0.3, planet.size + 0.5, 64);
+        const ringMaterial = new THREE.MeshBasicMaterial({
+          color: 0xd3d3d3, // Light gray for the ring
+          side: THREE.DoubleSide,
+          transparent: true
+        });
+        const ringMesh = new THREE.Mesh(ringGeometry, ringMaterial);
+        ringMesh.rotation.x = Math.PI / 2;
+        planetMesh.add(ringMesh); // Attach the rings to Saturn
+      }
+
+      // Create Orbit
+      const orbitCurve = new THREE.EllipseCurve(0, 0, planet.distance, planet.distance);
+      const orbitPoints = orbitCurve.getPoints(100);
+      const orbitGeometry = new THREE.BufferGeometry().setFromPoints(orbitPoints);
+      const orbitMaterial = new THREE.LineDashedMaterial({ color: 0xffffff, dashSize: 0.1, gapSize: 0.1 });
+      const orbit = new THREE.Line(orbitGeometry, orbitMaterial);
+      orbit.computeLineDistances();
+      orbit.rotation.x = Math.PI / 2;
+      orbits.push(orbit);
+      scene.add(orbit);
+    });
+
+    // Rocket
+    const rocketGeometry = new THREE.ConeGeometry(0.2, 0.5, 32);
+    const rocketMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 }); // Red rocket
+    const rocket = new THREE.Mesh(rocketGeometry, rocketMaterial);
+    rocket.rotation.x = Math.PI / 2; // Point the rocket horizontally
+    scene.add(rocket);
+
+    // Initial Rocket Position at the Sun
+    let currentPlanetIndex = -1;
+    rocket.position.set(0, 0, 0);
+
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+
+    const pointLight = new THREE.PointLight(0xffffff, 1);
+    pointLight.position.set(0, 0, 0);
+    scene.add(pointLight);
+
+    // Camera
+    camera.position.set(25, 15, 25); // Tilted top-down view
+    camera.lookAt(0, 0, 0);
+
+    // Resize Event
+    window.addEventListener("resize", () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Meteor Logic
+    const meteorGeometry = new THREE.SphereGeometry(0.05, 8, 8);
+    const meteorMaterial = new THREE.MeshBasicMaterial({ color: 0xaaaaaa }); // Gray color for meteors
+    const meteors = [];
+
+    function createMeteor() {
+      const meteor = new THREE.Mesh(meteorGeometry, meteorMaterial);
+      meteor.position.set(
+        Math.random() * 30 - 15, // Random X position
+        Math.random() * 20 - 10, // Random Y position
+        Math.random() * 30 - 15 // Random Z position
+      );
+      meteor.velocity = new THREE.Vector3(Math.random() * 0.05, Math.random() * 0.05, Math.random() * 0.05); // Random velocity
+      meteors.push(meteor);
+      scene.add(meteor);
+    }
+
+    // Create multiple meteors
+    for (let i = 0; i < 50; i++) {
+      createMeteor();
+    }
+
+    // Update meteor positions to simulate movement
+    function updateMeteors() {
+      meteors.forEach((meteor, index) => {
+        meteor.position.add(meteor.velocity);
+        // Reset position if meteor goes out of bounds
+        if (Math.abs(meteor.position.x) > 30 || Math.abs(meteor.position.y) > 20 || Math.abs(meteor.position.z) > 30) {
+          meteor.position.set(
+            Math.random() * 30 - 15,
+            Math.random() * 20 - 10,
+            Math.random() * 30 - 15
+          );
+        }
+      });
+    }
+
+    // Move Rocket Function
+    function moveRocket() {
+      if (currentPlanetIndex < planetData.length - 1) {
+        currentPlanetIndex++;
+
+        // Get target planet's position
+        const targetPlanet = planets[currentPlanetIndex];
+        const startX = rocket.position.x;
+        const startZ = rocket.position.z;
+
+        // Animate rocket movement
+        const duration = 2000; // Duration of the animation in ms
+        const startTime = performance.now();
+
+        function animateRocket() {
+          const elapsedTime = performance.now() - startTime;
+          const t = Math.min(elapsedTime / duration, 1); // Progress (0 to 1)
+
+          rocket.position.x = startX + t * (targetPlanet.mesh.position.x - startX);
+          rocket.position.z = startZ + t * (targetPlanet.mesh.position.z - startZ);
+
+          if (t < 1) {
+            requestAnimationFrame(animateRocket);
+          } else {
+            showPlanetInfo(targetPlanet);
+          }
+        }
+
+        animateRocket();
+      }
+    }
+
+    // Show planet info
+    function showPlanetInfo(targetPlanet) {
+      const planetInfo = document.getElementById('planetInfo');
+      document.getElementById('planetName').textContent = targetPlanet.name;
+      const planetSpecs = document.getElementById('planetSpecs');
+      planetSpecs.innerHTML = '';
+      targetPlanet.specs.forEach(spec => {
+        const li = document.createElement('li');
+        li.textContent = spec;
+        planetSpecs.appendChild(li);
+      });
+      planetInfo.style.display = 'block';
+    }
+
+    // Button Event Listener
+    document.getElementById("nextButton").addEventListener("click", moveRocket);
+
+    // Animation Loop
+    const animate = function () {
+      requestAnimationFrame(animate);
+
+      // Rotate Planets around the Sun
+      const overallSpeedFactor = 0.00005; // Slow overall speed
+      planets.forEach((planet, index) => {
+        const angle = Date.now() * overallSpeedFactor / (index + 1);
+        planet.mesh.position.x = planet.distance * Math.cos(angle);
+        planet.mesh.position.z = planet.distance * Math.sin(angle);
+      });
+
+      // Update meteor positions
+      updateMeteors();
+
+      renderer.render(scene, camera);
+    };
+
+    animate();
+  </script>
+</body>
+</html>

@@ -1,158 +1,252 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Solar System</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-body { margin: 0; overflow: hidden; background: #000; }
-#solar-system { width: 100vw; height: 100vh; position: relative; }
-.planet, .sun {
-    position: absolute;
-    cursor: pointer;
-    z-index: 2; /* Set a higher z-index for planets */
-}
-.orbit {
-    position: absolute;
-    border-radius: 50%;
-    border: 1px dashed rgba(255, 255, 255, 0.3);
-    z-index: 1; /* Set a lower z-index for orbits */
-}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name='author' content="Jonimar Marques Policarpo" />
+	<meta name='publisher' content="Treedbox.com" />
+	<title>SVG Solar System Orbit Planets - Treedox</title>
+	<link rel="stylesheet" href="styles.css">
+	<!-- <link rel="icon" href="icon/treedbox.png">
+	<link rel="icon" href="icon/treedbox-ani.svg"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
 
-@media (max-width: 768px) {
-    #solar-system { height: 80vh;}
-    .planet, .sun { transform: scale(0.7); }
-    .orbit { border: 1px dashed rgba(255, 255, 255, 0.2); }
-}
-svg {
-    display: block; /* Prevents extra space below SVG */
-    width: 100%;
-    height: 100%;
-}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
-/* Popup styles */
-#planet-info-popup {
-    position: fixed;
-    top: 10%;
-    left: 0;
-    width: 300px;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    display: none; /* Hidden initially */
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-}
-#planet-info-popup h3 {
-    margin-top: 0;
-}
-#planet-info-popup p {
-    margin-bottom: 5px;
-}
-</style>
 </head>
 <body>
-<div id="solar-system">
-  <div class="sun" id="sun">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg/800px-The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg" alt="Sun" style="width: 100%; height: 100%; border-radius: 50%;">
-  </div>
-</div>
+    <div class="overlay" id="planet-info">
+        <button class="close-btn" id="close-btn">&times;</button>
+        <h3 id="planet-name">Planet Name</h3>
+        <h2 id="title-name">Title Name</h2>
+        <div id="planet-details">Details about the planet will be displayed here.</div>
+    </div>
+    
 
-<!-- Popup for planet information -->
-<div id="planet-info-popup">
-    <h3 id="planet-name"></h3>
-    <p><strong>Radius:</strong> <span id="planet-radius"></span> km</p>
-    <p><strong>Distance from Sun:</strong> <span id="planet-distance"></span> million km</p>
-    <p><strong>Orbital Speed:</strong> <span id="planet-speed"></span> km/s</p>
-    <button onclick="closePopup()">Close</button>
-</div>
+	<svg style="fill-rule:evenodd" viewBox="0 0 25000 25000">
+		<defs>
+			<radialGradient id="sun">
+				<stop offset="30%" stop-color="yellow"/>
+				<stop offset="100%" stop-color="orange"/>
+			</radialGradient>
+			<radialGradient id="sunshine">
+				<stop offset="10%" stop-color="orange"/>
+				<stop offset="95%" stop-color="transparent"/>
+			</radialGradient>
+			<linearGradient id="shadow">
+				<stop offset="0" stop-color="transparent"/>
+				<stop offset="50%" stop-color="#000"/>
+			</linearGradient>
+			<linearGradient id="mercury-shadow">
+				<stop offset="50%"  stop-color="transparent"/>
+				<stop offset="100%" stop-color="rgba(0,0,0,.5)"/>
+			</linearGradient>
+			<linearGradient id="venus" x1="0" y1="0" x2="0" y2="100%">
+				<stop offset="30%"  stop-color="#f0990e"/>
+				<stop offset="40%"  stop-color="#fecb36"/>
+				<stop offset="60%"  stop-color="#f0990e"/>
+				<stop offset="100%" stop-color="#f0990e"/>
+			</linearGradient>
+			<radialGradient id="earth" fx="0.2" fy="0.2">
+				<stop offset="50%" stop-color="#009688"/>
+				<stop offset="60%" stop-color="#009688"/>
+				<stop offset="70%" stop-color="#0270e9"/>
+				<stop offset="100%" stop-color="#0270e9"/>
+			</radialGradient>
+			<radialGradient id="mars" fx="0.3" fy="0.3">
+				<stop offset="60%" stop-color="#e25409"/>
+				<stop offset="65%" stop-color="#e25409"/>
+				<stop offset="100%" stop-color="#BF360C"/>
+			</radialGradient>
+			<linearGradient id="jupiter" x1="0" y1="0" x2="0" y2="100%">
+				<stop offset="15%"   stop-color="#d7b872"/>
+				<stop offset="25%"  stop-color="#a24416"/>
+				<stop offset="30%"  stop-color="#a24416"/>
+				<stop offset="40%"  stop-color="#a6563e"/>
+				<stop offset="60%"  stop-color="#a6563e"/>
+				<stop offset="80%"  stop-color="#6f3620"/>
+				<stop offset="100%" stop-color="#d7b872"/>
+			</linearGradient>
+			<linearGradient id="saturn" x1="0" x2="0" y1="0" y2="100%">
+				<stop offset="0%"   stop-color="#ec9a22"/>
+				<stop offset="40%"  stop-color="#d16c10"/>
+				<stop offset="55%"  stop-color="#d16c10"/>
+				<stop offset="50%"  stop-color="#ec9925"/>
+				<stop offset="70%"  stop-color="#ec9925"/>
+				<stop offset="75%"  stop-color="#d07b15"/>
+				<stop offset="100%" stop-color="#ec9a22"/>
+			</linearGradient>
+			<linearGradient id="uranus" x1="0" y1="0" x2="0" y2="100%">
+				<stop offset="15%"   stop-color="#199cdd"/>
+				<stop offset="25%"  stop-color="#32b1fd"/>
+				<stop offset="30%"  stop-color="#199cdd"/>
+				<stop offset="40%"  stop-color="#32b1fd"/>
+				<stop offset="60%"  stop-color="#199cdd"/>
+				<stop offset="80%"  stop-color="#32b1fd"/>
+				<stop offset="100%" stop-color="#199cdd"/>
+			</linearGradient>
+			<linearGradient id="neptune" x1="0" y1="0" x2="0" y2="100%">
+				<stop offset="0%"   stop-color="#005de8"/>
+				<stop offset="25%"  stop-color="#0747a3"/>
+				<stop offset="50%"  stop-color="#287af7"/>
+				<stop offset="75%"  stop-color="#0747a3"/>
+				<stop offset="100%" stop-color="#005de8"/>
+			</linearGradient>
+		</defs>
+		<g>
+			<circle class="neptune-orbit" cx="50%" cy="50%" r="12000"/>
+			<circle class="uranus-orbit" cx="50%" cy="50%" r="10500"/>
+			<circle class="saturn-orbit" cx="50%" cy="50%" r="8000"/>
+			<circle class="jupiter-orbit" cx="50%" cy="50%" r="5500"/>
+			<circle class="mars-orbit" cx="50%" cy="50%" r="4100"/>
+			<circle class="earth-orbit" cx="50%" cy="50%" r="3100"/>
+			<circle class="venus-orbit" cx="50%" cy="50%" r="2000"/>
+			<circle class="mercury-orbit" cx="50%" cy="50%" r="1000"/>
+			<circle class="sun" cx="50%" cy="50%"  r="500"/>
 
-<script>
-const solarSystem = document.getElementById('solar-system');
-const sun = document.getElementById('sun');
+			<g class="neptune-group" id="neptune">
+				<circle class="neptune" cx="50%" cy="50%" r="450"/>
+				<circle class="shadow" cx="50%" cy="50%" r="450"/>
+			</g>
+			<g class="uranus-group" id="uranus">
+				<circle class="uranus" cx="50%" cy="50%" r="450"/>
+				<circle class="shadow" cx="50%" cy="50%" r="450"/>
+			</g>
+			<g class="saturn-group" id="saturn">
+				<circle class="saturn saturn-ring2" cx="50%" cy="50%" r="1400"/>
+				<circle class="shadow" cx="50%" cy="50%" r="1450"/>
+				<circle class="saturn saturn-ring1" cx="50%" cy="50%" r="1100"/>
+				<circle class="shadow" cx="50%" cy="50%" r="1320"/>
+				<circle class="saturn" cx="50%" cy="50%" r="700"/>
+				<circle class="shadow" cx="50%" cy="50%" r="700"/>
+			</g>
+			<g class="jupiter-group" id="jupiter">
+				<circle class="jupiter" cx="50%" cy="50%" r="800"/>
+				<circle class="shadow" cx="50%" cy="50%" r="800"/>
+			</g>
+			<g class="mars-group" id="mars">
+				<circle class="mars" cx="50%" cy="50%" r="300"/>
+				<circle class="shadow" cx="50%" cy="50%" r="300"/>
+			</g>
+			<g class="earth-group" id="earth">
+				<circle class="earth-limit" cx="50%" cy="50%" r="590"/>
+				<circle class="moon-orbit" cx="50%" cy="50%" r="500"/>
+				<g class="moon-group" id="moon">
+					<circle class="moon" cx="50%" cy="50%" r="50"/>
+					<circle class="moon-shadow" cx="50%" cy="50%" r="50"/>
+				</g>
+				<circle class="earth" cx="50%" cy="50%" r="400"/>
+				<circle class="shadow" cx="50%" cy="50%" r="400"/>
+			</g>
+			<g class="venus-group" id="venus">
+				<circle class="venus" cx="50%" cy="50%" r="400"/>
+				<circle class="shadow" cx="50%" cy="50%" r="400"/>
+			</g>
+			<g class="mercury-group" id="mercury">
+				<circle class="mercury" cx="50%" cy="50%" r="100"/>
+				<circle class="mercury-shadow" cx="50%" cy="50%" r="100"/>
+			</g>
+		</g>
+	</svg>
 
-// Planet data
-const planetsData = [
-    { name: 'Mercury', radius: 16, distance: 40, speed: 4.15, svg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Mercury_in_true_color.jpg/800px-Mercury_in_true_color.jpg' },
-    { name: 'Venus', radius: 24, distance: 70, speed: 1.62, svg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Venus-real_color.jpg/1024px-Venus-real_color.jpg' },
-    { name: 'Earth', radius: 26, distance: 100, speed: 1, svg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/1024px-The_Earth_seen_from_Apollo_17.jpg' },
-    { name: 'Mars', radius: 20, distance: 130, speed: 0.53, svg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/1024px-OSIRIS_Mars_true_color.jpg' },
-    { name: 'Jupiter', radius: 48, distance: 190, speed: 0.084, svg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Jupiter_New_Horizons.jpg/1024px-Jupiter_New_Horizons.jpg' },
-    { name: 'Saturn', radius: 42, distance: 250, speed: 0.034, svg: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Top_view_of_the_rings_of_Saturn_by_Cassini_-_October_10%2C_2013.jpg' },
-    { name: 'Uranus', radius: 38, distance: 310, speed: 0.012, svg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Uranus2.jpg/1024px-Uranus2.jpg' },
-    { name: 'Neptune', radius: 36, distance: 370, speed: 0.006, svg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Neptune_Full.jpg/1024px-Neptune_Full.jpg' }
-];
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            const overlay = document.getElementById("planet-info");
+            const closeButton = document.getElementById("close-btn");
+            const planetName = document.getElementById("planet-name");
+            const titleName = document.getElementById("title-name")
+            const planetDetailsText = document.getElementById("planet-details");
 
-let centerX, centerY;
-function setCenter() {
-    centerX = window.innerWidth / 2;
-    centerY = window.innerHeight / 2;
-}
+            const planets = document.querySelectorAll('g');
+            
+            const planetDetails = {
+                mercury: {
+                    name: "1729 - The Hardy-Ramanujan Number",
+                    details: `
+                        <p><strong>1729</strong> is known as the Hardy-Ramanujan number. It is famous for the following property:</p>
+                        <p><i>1729 is the smallest number expressible as the sum of two cubes in two different ways:</i></p>
+                        <p><strong>1729 = 1^3 + 12^3 = 9^3 + 10^3</strong></p>
+                    `
+                },
+                venus: {
+                    name: "Partition Function (p(n))",
+                    details: `
+                        <p>Ramanujan discovered astonishing properties of the partition function, such as:</p>
+                        <p>\\( p(5k + 4) \\mod 5 = 0 \\)</p>
+                        <p>\\( p(7k + 5) \\mod 7 = 0 \\)</p>
+                    `
+                },
+                earth: {
+                    name: "Ramanujan Prime",
+                    details: `
+                        <p>A special sequence of prime numbers defined by Ramanujan, e.g., 2, 11, 17, 29, etc.</p>
+                    `
+                },
+                mars: {
+                    name: "Ramanujan's Pi Formula",
+                    details: `
+                        <p>The incredibly fast converging series for <strong>\\( \\frac{1}{\\pi} \\)</strong>:</p>
+                        <p>\\( \\frac{1}{\\pi} = \\frac{2 \\sqrt{2}}{9801} \\sum_{k=0}^{\\infty} \\frac{(4k)! (1103 + 26390k)}{(k!)^4 396^{4k}} \\)</p>
+                    `
+                },
+                jupiter: {
+                    name: "Magic Squares",
+                    details: `
+                        <p>Ramanujan constructed a 4x4 magic square where the rows, columns, diagonals, and even the center square sum to 139.</p>
+                    `
+                },
+                saturn: {
+                    name: "Modular Functions",
+                    details: `
+                        <p>Ramanujan's work on modular forms and his connection to the number 24 appear in the coefficients of the q-expansion of the modular discriminant.</p>
+                    `
+                },
+                uranus: {
+                    name: "Elliptic Functions",
+                    details: `
+                        <p>Ramanujan contributed to elliptic integrals and functions, with solutions expressed elegantly in terms of infinite series.</p>
+                    `
+                },
+                neptune: {
+                    name: "Mock Theta Functions",
+                    details: `
+                        <p>Ramanujan introduced 17 functions that defied explanation at the time, paving the way for modern mathematics.</p>
+                    `
+                },
+                pluto: {
+                    name: "His Age at Death - 32",
+                    details: `
+                        <p>Despite his short life, Ramanujan's legacy profoundly impacted mathematics forever.</p>
+                    `
+                }
+            };
 
-setCenter();
-window.addEventListener('resize', setCenter);
+            planets.forEach((planet) => {
+                planet.addEventListener('click', (event) => {
+                    // Log the class name of the clicked planet group
+                    let planetId
+                    if(planet.getAttribute('id')!==null){
+                        planetId = planet.getAttribute('id');
+                    }else return;
+                    console.log(planetId)
+                    const details = planetDetails[planetId];
+                    if (details) {
+                        planetName.textContent = planetId.charAt(0).toLocaleUpperCase() + planetId.slice(1);
+                        titleName.textContent = details.name;
+                        planetDetailsText.innerHTML = details.details; // Use innerHTML to insert HTML content
+                        MathJax.Hub.Queue(["Typeset", MathJax.Hub]); // Re-render equations
+                        overlay.classList.add("active");
+                    }
+                });
+            });
 
-sun.style.width = '60px'; // Increased sun size
-sun.style.height = '60px';
-sun.style.left = centerX - 30 + 'px';
-sun.style.top = centerY - 30 + 'px';
+            closeButton.addEventListener("click", () => {
+                overlay.classList.remove("active");
+            });
+        });
+    </script>
 
-// Create planets and orbits
-planetsData.forEach(planetData => {
-    const planet = document.createElement('div');
-    planet.classList.add('planet');
-    planet.id = planetData.name.toLowerCase();
-    planet.style.width = planetData.radius + 'px';
-    planet.style.height = planetData.radius + 'px';
-    planet.style.backgroundImage = `url(${planetData.svg})`;
-    planet.style.backgroundSize = 'cover';
-    solarSystem.appendChild(planet);
-
-    const orbit = document.createElement('div');
-    orbit.classList.add('orbit');
-    orbit.style.width = planetData.distance * 2 + 'px';
-    orbit.style.height = planetData.distance * 2 + 'px';
-    orbit.style.left = centerX - planetData.distance + 'px';
-    orbit.style.top = centerY - planetData.distance + 'px';
-    solarSystem.appendChild(orbit);
-
-    // Add click event to open popup
-    planet.addEventListener('click', () => openPopup(planetData));
-});
-
-// Update planet positions
-function updatePositions() {
-    const now = new Date();
-    const time = now.getTime();
-
-    planetsData.forEach(planetData => {
-        const planet = document.getElementById(planetData.name.toLowerCase());
-        const angle = (time * planetData.speed / 1000) % 360;
-        const x = centerX + planetData.distance * Math.cos(angle * Math.PI / 180);
-        const y = centerY + planetData.distance * Math.sin(angle * Math.PI / 180);
-
-        planet.style.left = x - planetData.radius / 2 + 'px';
-        planet.style.top = y - planetData.radius / 2 + 'px';
-    });
-}
-
-setInterval(updatePositions, 20);
-updatePositions();
-
-// Open the popup with planet details
-function openPopup(planetData) {
-    document.getElementById('planet-name').innerText = planetData.name;
-    document.getElementById('planet-radius').innerText = planetData.radius * 1000; // Radius in km
-    document.getElementById('planet-distance').innerText = planetData.distance; // Distance in million km
-    document.getElementById('planet-speed').innerText = planetData.speed; // Speed in km/s
-
-    document.getElementById('planet-info-popup').style.display = 'block';
-}
-
-// Close the popup
-function closePopup() {
-    document.getElementById('planet-info-popup').style.display = 'none';
-}
-</script>
 
 </body>
 </html>

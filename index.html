@@ -18,10 +18,12 @@
     <div class="overlay" id="planet-info">
         <div class="planet-background"></div> <!-- Separate div for the background -->
 
-        <button class="close-btn" id="close-btn">&times;</button>
-        <h3 id="planet-name">Planet Name</h3>
-        <h2 id="title-name">Title Name</h2>
-        <div id="planet-details">Details about the planet will be displayed here.</div>
+        <div >
+            <button class="close-btn" id="close-btn">&times;</button>
+            <h3 id="planet-name">Planet Name</h3>
+            <h2 id="title-name">Title Name</h2>
+            <div id="planet-details">Details about the planet will be displayed here.</div>
+        </div>
     </div>
     
 
@@ -169,54 +171,78 @@
                     `
                 },
                 venus: {
-                    name: "Partition Function (p(n))",
+                    name: "Partition Numbers (p(n))",
                     details: `
-                        <p>Ramanujan discovered astonishing properties of the partition function, such as:</p>
-                        <p>\\( p(5k + 4) \\mod 5 = 0 \\)</p>
-                        <p>\\( p(7k + 5) \\mod 7 = 0 \\)</p>
+                        <p>Ramanujan discovered astonishing properties of the partition function, which describes the ways in which a number can be expressed as a sum of positive integers, disregarding the order of the summands. For example, the partition number of 4 is 5 because 4 can be represented as:</p>
+                        <ul>
+                            <li>3 + 1</li>
+                            <li>2 + 2</li>
+                            <li>2 + 1 + 1</li>
+                            <li>1 + 1 + 1 + 1</li>
+                        </ul>
+                        <p>Thus, p(4) = 5. Ramanujan is often considered the father of Partition Theory due to his groundbreaking work in this area.</p>
                     `
                 },
                 earth: {
-                    name: "Ramanujan Prime",
+                    name: "Ramanujan Congruences",
                     details: `
-                        <p>A special sequence of prime numbers defined by Ramanujan, e.g., 2, 11, 17, 29, etc.</p>
+                        <p>Ramanujan discovered that the partition function has patterns in modular arithmetic, which are now known as Ramanujan's congruences. These congruences describe the divisibility properties of the number of partitions of a given integer.</p>
+                        <p>For example, Ramanujan showed that:</p>
+                        <p><i>If the decimal representation of a number ends in 4 or 9, then the number of partitions of that number will be divisible by 5.</i></p>
+                        <p>Some famous congruences include:</p>
+                        <p><strong>p(5k + 4) ≡ 0 (mod 5)</strong></p>
+                        <p><strong>p(7k + 5) ≡ 0 (mod 7)</strong></p>
+                        <p><strong>p(11k + 6) ≡ 0 (mod 11)</strong></p>
+                        <p>These congruences highlight the deep structure within the partition function and have been instrumental in the study of number theory.</p>
                     `
                 },
                 mars: {
                     name: "Ramanujan's Pi Formula",
                     details: `
                         <p>The incredibly fast converging series for <strong>\\( \\frac{1}{\\pi} \\)</strong>:</p>
-                        <p>\\( \\frac{1}{\\pi} = \\frac{2 \\sqrt{2}}{9801} \\sum_{k=0}^{\\infty} \\frac{(4k)! (1103 + 26390k)}{(k!)^4 396^{4k}} \\)</p>
+                        <p><i>\\( \\frac{1}{\\pi} = \\frac{2 \\sqrt{2}}{9801} \\sum_{k=0}^{\\infty} \\frac{(4k)! (1103 + 26390k)}{(k!)^4 396^{4k}} \\)</i></p>
+                        <p>Using just the first term in the series:</p>
+                        <p>\\( \\frac{1}{\\pi} \\approx \\frac{2 \\sqrt{2}}{9801} \\times \\frac{1103}{396^0} = 0.31830989 \\), which is already very close to the actual value of \\( \\frac{1}{\\pi} \\).</p>
                     `
                 },
                 jupiter: {
                     name: "Magic Squares",
                     details: `
-                        <p>Ramanujan constructed a 4x4 magic square where the rows, columns, diagonals, and even the center square sum to 139.</p>
+                        <p>Ramanujan constructed a 4x4 magic square where the rows, columns, diagonals, and even the center square sum to 34.</p>
+                        <p>Example of a 4x4 magic square:</p>
+                        <p>Each row, column, and diagonal sums to 34:</p>
+                        <p>Row 1: 1 + 15 + 14 + 4 = 34</p>
+                        <p>Row 2: 12 + 6 + 7 + 9 = 34</p>
+                        <p>Row 3: 8 + 10 + 11 + 5 = 34</p>
+                        <p>Row 4: 13 + 3 + 2 + 16 = 34</p>
                     `
                 },
                 saturn: {
-                    name: "Modular Functions",
+                    name: "Modular Functions (One-Way Function)",
                     details: `
                         <p>Ramanujan's work on modular forms and his connection to the number 24 appear in the coefficients of the q-expansion of the modular discriminant.</p>
+                        <p>One-way functions are mathematical operations that are easy to compute in one direction but difficult to reverse without additional information. For example, the transformation \\( f(x) = x^2 \\) is easy to compute, but finding the inverse, \\( x = \\sqrt{f(x)} \\), requires additional constraints like restricting the domain of \\( f(x) \\).</p>
                     `
                 },
                 uranus: {
-                    name: "Elliptic Functions",
+                    name: "Ramanujan's Paradox (-1/12)",
                     details: `
-                        <p>Ramanujan contributed to elliptic integrals and functions, with solutions expressed elegantly in terms of infinite series.</p>
+                        <p>Ramanujan explored infinite series, notably:</p>
+                        <p><strong>1 + 2 + 3 + 4 + ...</strong></p>
+                        <p>Though this series diverges to infinity, Ramanujan assigned it the value:</p>
+                        <p><strong>-1/12</strong></p>
+                        <p>Known as "Ramanujan's Paradox," this result arises from advanced techniques like zeta function regularization:</p>
+                        <p>\\( \\zeta(-1) = -1/12 \\), where \\( \\zeta(s) \\) is the Riemann zeta function.</p>
+                        <p>This insight plays a critical role in physics, including quantum mechanics and string theory.</p>
                     `
+
                 },
                 neptune: {
-                    name: "Mock Theta Functions",
+                    name: "Mock Theta Functions (Three-Way Function)",
                     details: `
                         <p>Ramanujan introduced 17 functions that defied explanation at the time, paving the way for modern mathematics.</p>
-                    `
-                },
-                pluto: {
-                    name: "His Age at Death - 32",
-                    details: `
-                        <p>Despite his short life, Ramanujan's legacy profoundly impacted mathematics forever.</p>
+                        <p>Three-way functions involve transformations that operate in multiple directions and are useful in complex multi-step processes. In the case of mock theta functions, the transformation involves not just the inputs and outputs, but also intermediate steps of computation.</p>
+                        <p>For example, mock theta functions are connected to the study of q-series, where multiple transformations or 'ways' are used to relate different mathematical objects. These functions are important in modern fields like string theory, partition theory, and mathematical physics.</p>
                     `
                 }
             };

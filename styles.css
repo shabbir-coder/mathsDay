@@ -419,6 +419,7 @@ svg{
   position: absolute;
   top: 20px;
   right: 20px;
+  z-index: 19;
   background: none;
   color: #5d4400;
   font-size: 30px;
@@ -467,6 +468,13 @@ svg{
 
   .overlay h3, .mjx-chtml {
       font-size: 1.2em;
+  }
+  .float-section{
+    position: absolute;
+    top: 0;
+    z-index: 15;
+    transform: translate(0%, -17%);
+    font-size: 14px;
   }
 }
 

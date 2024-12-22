@@ -16,6 +16,8 @@
 </head>
 <body>
     <div class="overlay" id="planet-info">
+        <div class="planet-background"></div> <!-- Separate div for the background -->
+
         <button class="close-btn" id="close-btn">&times;</button>
         <h3 id="planet-name">Planet Name</h3>
         <h2 id="title-name">Title Name</h2>
@@ -24,130 +26,122 @@
     
 
 	<svg style="fill-rule:evenodd" viewBox="0 0 25000 25000">
-		<defs>
-			<radialGradient id="sun">
-				<stop offset="30%" stop-color="yellow"/>
-				<stop offset="100%" stop-color="orange"/>
-			</radialGradient>
-			<radialGradient id="sunshine">
-				<stop offset="10%" stop-color="orange"/>
-				<stop offset="95%" stop-color="transparent"/>
-			</radialGradient>
-			<linearGradient id="shadow">
-				<stop offset="0" stop-color="transparent"/>
-				<stop offset="50%" stop-color="#000"/>
-			</linearGradient>
-			<linearGradient id="mercury-shadow">
-				<stop offset="50%"  stop-color="transparent"/>
-				<stop offset="100%" stop-color="rgba(0,0,0,.5)"/>
-			</linearGradient>
-			<linearGradient id="venus" x1="0" y1="0" x2="0" y2="100%">
-				<stop offset="30%"  stop-color="#f0990e"/>
-				<stop offset="40%"  stop-color="#fecb36"/>
-				<stop offset="60%"  stop-color="#f0990e"/>
-				<stop offset="100%" stop-color="#f0990e"/>
-			</linearGradient>
-			<radialGradient id="earth" fx="0.2" fy="0.2">
-				<stop offset="50%" stop-color="#009688"/>
-				<stop offset="60%" stop-color="#009688"/>
-				<stop offset="70%" stop-color="#0270e9"/>
-				<stop offset="100%" stop-color="#0270e9"/>
-			</radialGradient>
-			<radialGradient id="mars" fx="0.3" fy="0.3">
-				<stop offset="60%" stop-color="#e25409"/>
-				<stop offset="65%" stop-color="#e25409"/>
-				<stop offset="100%" stop-color="#BF360C"/>
-			</radialGradient>
-			<linearGradient id="jupiter" x1="0" y1="0" x2="0" y2="100%">
-				<stop offset="15%"   stop-color="#d7b872"/>
-				<stop offset="25%"  stop-color="#a24416"/>
-				<stop offset="30%"  stop-color="#a24416"/>
-				<stop offset="40%"  stop-color="#a6563e"/>
-				<stop offset="60%"  stop-color="#a6563e"/>
-				<stop offset="80%"  stop-color="#6f3620"/>
-				<stop offset="100%" stop-color="#d7b872"/>
-			</linearGradient>
-			<linearGradient id="saturn" x1="0" x2="0" y1="0" y2="100%">
-				<stop offset="0%"   stop-color="#ec9a22"/>
-				<stop offset="40%"  stop-color="#d16c10"/>
-				<stop offset="55%"  stop-color="#d16c10"/>
-				<stop offset="50%"  stop-color="#ec9925"/>
-				<stop offset="70%"  stop-color="#ec9925"/>
-				<stop offset="75%"  stop-color="#d07b15"/>
-				<stop offset="100%" stop-color="#ec9a22"/>
-			</linearGradient>
-			<linearGradient id="uranus" x1="0" y1="0" x2="0" y2="100%">
-				<stop offset="15%"   stop-color="#199cdd"/>
-				<stop offset="25%"  stop-color="#32b1fd"/>
-				<stop offset="30%"  stop-color="#199cdd"/>
-				<stop offset="40%"  stop-color="#32b1fd"/>
-				<stop offset="60%"  stop-color="#199cdd"/>
-				<stop offset="80%"  stop-color="#32b1fd"/>
-				<stop offset="100%" stop-color="#199cdd"/>
-			</linearGradient>
-			<linearGradient id="neptune" x1="0" y1="0" x2="0" y2="100%">
-				<stop offset="0%"   stop-color="#005de8"/>
-				<stop offset="25%"  stop-color="#0747a3"/>
-				<stop offset="50%"  stop-color="#287af7"/>
-				<stop offset="75%"  stop-color="#0747a3"/>
-				<stop offset="100%" stop-color="#005de8"/>
-			</linearGradient>
-		</defs>
-		<g>
-			<circle class="neptune-orbit" cx="50%" cy="50%" r="12000"/>
-			<circle class="uranus-orbit" cx="50%" cy="50%" r="10500"/>
-			<circle class="saturn-orbit" cx="50%" cy="50%" r="8000"/>
-			<circle class="jupiter-orbit" cx="50%" cy="50%" r="5500"/>
-			<circle class="mars-orbit" cx="50%" cy="50%" r="4100"/>
-			<circle class="earth-orbit" cx="50%" cy="50%" r="3100"/>
-			<circle class="venus-orbit" cx="50%" cy="50%" r="2000"/>
-			<circle class="mercury-orbit" cx="50%" cy="50%" r="1000"/>
-			<circle class="sun" cx="50%" cy="50%"  r="500"/>
-
-			<g class="neptune-group" id="neptune">
-				<circle class="neptune" cx="50%" cy="50%" r="450"/>
-				<circle class="shadow" cx="50%" cy="50%" r="450"/>
-			</g>
-			<g class="uranus-group" id="uranus">
-				<circle class="uranus" cx="50%" cy="50%" r="450"/>
-				<circle class="shadow" cx="50%" cy="50%" r="450"/>
-			</g>
-			<g class="saturn-group" id="saturn">
-				<circle class="saturn saturn-ring2" cx="50%" cy="50%" r="1400"/>
-				<circle class="shadow" cx="50%" cy="50%" r="1450"/>
-				<circle class="saturn saturn-ring1" cx="50%" cy="50%" r="1100"/>
-				<circle class="shadow" cx="50%" cy="50%" r="1320"/>
-				<circle class="saturn" cx="50%" cy="50%" r="700"/>
-				<circle class="shadow" cx="50%" cy="50%" r="700"/>
-			</g>
-			<g class="jupiter-group" id="jupiter">
-				<circle class="jupiter" cx="50%" cy="50%" r="800"/>
-				<circle class="shadow" cx="50%" cy="50%" r="800"/>
-			</g>
-			<g class="mars-group" id="mars">
-				<circle class="mars" cx="50%" cy="50%" r="300"/>
-				<circle class="shadow" cx="50%" cy="50%" r="300"/>
-			</g>
-			<g class="earth-group" id="earth">
-				<circle class="earth-limit" cx="50%" cy="50%" r="590"/>
-				<circle class="moon-orbit" cx="50%" cy="50%" r="500"/>
-				<g class="moon-group" id="moon">
-					<circle class="moon" cx="50%" cy="50%" r="50"/>
-					<circle class="moon-shadow" cx="50%" cy="50%" r="50"/>
-				</g>
-				<circle class="earth" cx="50%" cy="50%" r="400"/>
-				<circle class="shadow" cx="50%" cy="50%" r="400"/>
-			</g>
-			<g class="venus-group" id="venus">
-				<circle class="venus" cx="50%" cy="50%" r="400"/>
-				<circle class="shadow" cx="50%" cy="50%" r="400"/>
-			</g>
-			<g class="mercury-group" id="mercury">
-				<circle class="mercury" cx="50%" cy="50%" r="100"/>
-				<circle class="mercury-shadow" cx="50%" cy="50%" r="100"/>
-			</g>
-		</g>
-	</svg>
+        <!-- Neptune -->
+        <pattern id="neptune-pattern" patternUnits="objectBoundingBox" width="1" height="1">
+            <image href="./asset/neptune.png" width="1200" height="1200" />
+        </pattern>
+    
+        <!-- Uranus -->
+        <pattern id="uranus-pattern" patternUnits="objectBoundingBox" width="1" height="1">
+            <image href="./asset/uranus.png" width="1200" height="1200" />
+        </pattern>
+    
+        <!-- Saturn -->
+        <pattern id="saturn-pattern" patternUnits="objectBoundingBox" width="1" height="1">
+            <image href="./asset/saturn.png" width="1800" height="1800" />
+        </pattern>
+    
+        <!-- Jupiter -->
+        <pattern id="jupiter-pattern" patternUnits="objectBoundingBox" width="1" height="1">
+            <image href="./asset/jupiter.png" width="2000" height="2000" />
+        </pattern>
+    
+        <!-- Mars -->
+        <pattern id="mars-pattern" patternUnits="objectBoundingBox" width="1" height="1">
+            <image href="./asset/mars.png" width="900" height="900" />
+        </pattern>
+    
+        <!-- Earth -->
+        <pattern id="earth-pattern" patternUnits="objectBoundingBox" width="1" height="1">
+            <image href="./asset/earth.png" width="1200" height="1200" />
+        </pattern>
+    
+        <!-- Venus -->
+        <pattern id="venus-pattern" patternUnits="objectBoundingBox" width="1" height="1">
+            <image href="./asset/venus.png" width="1200" height="1200" />
+        </pattern>
+    
+        <!-- Mercury -->
+        <pattern id="mercury-pattern" patternUnits="objectBoundingBox" width="1" height="1">
+            <image href="./asset/mercury.png" width="400" height="400" />
+        </pattern>
+    
+        <!-- Moon -->
+        <pattern id="moon-pattern" patternUnits="objectBoundingBox" width="1" height="1">
+            <image href="./asset/moon.png" width="200" height="200" />
+        </pattern>
+    
+        <pattern id="sun-pattern" patternUnits="objectBoundingBox" width="1" height="1">
+            <image href="./asset/sun.png" width="1500" height="1500" />
+        </pattern>
+    
+        <defs>
+            <radialGradient id="sun">
+                <stop offset="30%" stop-color="yellow"/>
+                <stop offset="100%" stop-color="orange"/>
+            </radialGradient>
+            <radialGradient id="sunshine">
+                <stop offset="10%" stop-color="orange"/>
+                <stop offset="95%" stop-color="transparent"/>
+            </radialGradient>
+            <linearGradient id="shadow">
+                <stop offset="0" stop-color="transparent"/>
+                <stop offset="50%" stop-color="#000"/>
+            </linearGradient>
+        </defs>
+    
+        <g>
+            <circle class="neptune-orbit" cx="50%" cy="50%" r="14000"/>
+            <circle class="uranus-orbit" cx="50%" cy="50%" r="12000"/>
+            <circle class="saturn-orbit" cx="50%" cy="50%" r="9000"/>
+            <circle class="jupiter-orbit" cx="50%" cy="50%" r="6500"/>
+            <circle class="mars-orbit" cx="50%" cy="50%" r="4900"/>
+            <circle class="earth-orbit" cx="50%" cy="50%" r="3700"/>
+            <circle class="venus-orbit" cx="50%" cy="50%" r="2400"/>
+            <circle class="mercury-orbit" cx="50%" cy="50%" r="1200"/>
+            <circle class="sun" id="sunujan" cx="50%" cy="50%" r="750" fill="url(#sun-pattern)"/>
+    
+            <g class="neptune-group" id="neptune">
+                <circle class="neptune" cx="50%" cy="50%" r="600" fill="url(#neptune-pattern)" />
+            </g>
+    
+            <!-- Uranus -->
+            <g class="uranus-group" id="uranus">
+                <circle class="uranus" cx="50%" cy="50%" r="600" fill="url(#uranus-pattern)" />
+            </g>
+    
+            <!-- Saturn -->
+            <g class="saturn-group" id="saturn">
+                <circle class="saturn" cx="50%" cy="50%" r="900" fill="url(#saturn-pattern)" />
+            </g>
+    
+            <g class="jupiter-group" id="jupiter">
+                <circle class="jupiter" cx="50%" cy="50%" r="1000" fill="url(#jupiter-pattern)"/>
+            </g>
+    
+            <g class="mars-group" id="mars">
+                <circle class="mars" cx="50%" cy="50%" r="500" fill="url(#mars-pattern)" />
+            </g>
+    
+            <g class="earth-group" id="earth">
+                <circle class="earth-limit" cx="50%" cy="50%" r="780" fill="none" />
+                <circle class="moon-orbit" cx="50%" cy="50%" r="700" fill="none" stroke="#888" stroke-width="2" />
+                <g class="moon-group" id="moon">
+                    <circle class="moon" cx="50%" cy="50%" r="100" fill="url(#moon-pattern)" />
+                </g>
+                <circle class="earth" cx="50%" cy="50%" r="600" fill="url(#earth-pattern)" />
+            </g>
+    
+            <g class="venus-group" id="venus">
+                <circle class="venus" cx="50%" cy="50%" r="600" fill="url(#venus-pattern)" />
+            </g>
+    
+            <g class="mercury-group" id="mercury">
+                <circle class="mercury" cx="50%" cy="50%" r="150" fill="url(#mercury-pattern)" />
+            </g>
+        </g>
+    </svg>
+    
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -160,7 +154,12 @@
 
             const planets = document.querySelectorAll('g');
             
+
             const planetDetails = {
+                sunujan: {
+                    name: "Ramanujan Numbers And Patterns",
+                    details: ''
+                },
                 mercury: {
                     name: "1729 - The Hardy-Ramanujan Number",
                     details: `
@@ -222,25 +221,49 @@
                 }
             };
 
+            // Add event listener for planets and sun
             planets.forEach((planet) => {
                 planet.addEventListener('click', (event) => {
-                    // Log the class name of the clicked planet group
-                    let planetId
-                    if(planet.getAttribute('id')!==null){
-                        planetId = planet.getAttribute('id');
-                    }else return;
-                    console.log(planetId)
-                    const details = planetDetails[planetId];
-                    if (details) {
-                        planetName.textContent = planetId.charAt(0).toLocaleUpperCase() + planetId.slice(1);
-                        titleName.textContent = details.name;
-                        planetDetailsText.innerHTML = details.details; // Use innerHTML to insert HTML content
-                        MathJax.Hub.Queue(["Typeset", MathJax.Hub]); // Re-render equations
-                        overlay.classList.add("active");
-                    }
+                    const planetId = planet.id || event.target.id;
+                    if(!planetId) return
+                    console.log(`Planet clicked: ${planetId}`);
+
+                    // Handle planet background and details (similar to what you already have)
+                    updateOverlay(planetId);
                 });
             });
 
+            function updateOverlay(planetId) {
+                const planetBackground = document.querySelector('.planet-background');
+                const overlay = document.querySelector('.overlay');
+                const details = planetDetails[planetId];
+                const planetImageUrl = `./asset/${planetId}.png`;
+                planetBackground.style.backgroundImage = `url(${planetImageUrl})`;
+                    
+                overlay.classList.add('active');
+                if (details) {
+                    const planetName = document.getElementById('planet-name');
+                    const titleName = document.getElementById('title-name');
+                    const planetDetailsText = document.getElementById('planet-details');
+                    
+                    planetName.textContent = planetId === 'sunujan' 
+                    ? '' 
+                    : planetId.charAt(0).toUpperCase() + planetId.slice(1).toLowerCase();;
+                    titleName.textContent = details.name;
+                    console.log(details.details)
+                    if(details.details){
+                        planetDetailsText.style.visibility = 'visible'
+                        planetDetailsText.innerHTML = details.details;
+                        MathJax.Hub.Queue(["Typeset", MathJax.Hub]); 
+                    }else{
+                        planetDetailsText.style.visibility = 'hidden'
+                    }
+                }else{
+                    console.log('here')
+                    
+                }
+            }
+            
             closeButton.addEventListener("click", () => {
                 overlay.classList.remove("active");
             });

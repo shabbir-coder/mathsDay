@@ -23,7 +23,6 @@ svg{
   height: 99%;
 }
 .sun {
-  fill:url(#sun);
   transform: rotate(10deg);
   transform-origin: center;
 }
@@ -78,280 +77,307 @@ svg{
   animation: mercury-group 46s linear infinite;
 }
 .mercury {
-  fill:#be9a60;
   transform-origin: center;
   animation: rotation-mercury 46s linear infinite;
+  scale:1.2
 }
 .mercury-shadow {
   fill: url(#mercury-shadow);
 }
+
 .venus-group {
   transform-origin: center;
   animation: venus-group 62s linear infinite;
 }
 .venus {
-  fill:url(#venus);
   transform-origin: center;
   animation: rotation-venus 62s linear infinite;
 }
-.earth-group{
+
+.earth-group {
   transform-origin: center;
   animation: earth-group 76s linear infinite;
 }
-.earth-limit{
+.earth-limit {
   fill: none;
 }
 .earth {
-  fill:url(#earth);
   transform-origin: center;
   animation: rotation-earth 76s linear infinite;
+  scale:0.9
 }
 .moon-orbit {
-  fill:none;
-  stroke:#E6E6E6;
-  stroke-width:1;
+  fill: none;
+  stroke: #E6E6E6;
+  stroke-width: 1;
 }
 .moon-group {
   transform-origin: center;
   animation: moon-group 24s linear infinite;
 }
 .moon {
-  fill:#E6E6E6;
   transform-origin: center;
   animation: rotation-moon 24s linear infinite;
 }
-.moon-shadow {
-  fill: url(#shadow);
-  transform-origin: center;
-  animation: rotation-moon 24s reverse linear infinite;
-}
+
 .mars-group {
   transform-origin: center;
   animation: mars-group 98s linear infinite;
 }
 .mars {
-  fill: url(#mars);
   transform-origin: center;
   animation: rotation-mars 98s linear infinite;
 }
+
 .jupiter-group {
   transform-origin: center;
   animation: jupiter-group 105s linear infinite;
 }
 .jupiter {
-  fill: url(#jupiter);
   transform-origin: center;
   animation: rotation-jupiter 105s linear infinite;
+  scale:1.4;
 }
+
 .saturn-group {
   transform-origin: center;
   animation: saturn-group 124s linear infinite;
 }
 .saturn {
-  fill: url(#saturn);
   transform-origin: center;
   animation: rotation-saturn 124s linear infinite;
+  scale:1.5
 }
-.saturn-ring1{
-  fill:none;
-  stroke:#bf4c0d;
-  stroke-width:400;
+.saturn-ring1 {
+  fill: none;
+  stroke: #bf4c0d;
+  stroke-width: 400;
   animation: rotation-saturn 124s linear infinite;
 }
-.saturn-ring2{
-  fill:none;
-  stroke:#bf4c0d;
-  stroke-width:50;
+.saturn-ring2 {
+  fill: none;
+  stroke: #bf4c0d;
+  stroke-width: 50;
   animation: rotation-saturn 124s linear infinite;
 }
-.uranus-group{
+
+.uranus-group {
   transform-origin: center;
   animation: uranus-group 152s linear infinite;
 }
 .uranus {
-  fill: url(#uranus);
   transform-origin: center;
   animation: rotation-uranus 152s linear infinite;
 }
-.neptune-group{
+
+.neptune-group {
   transform-origin: center;
   animation: neptune-group 184s linear infinite;
 }
 .neptune {
-  fill: url(#neptune);
   transform-origin: center;
   animation: rotation-neptune 184s linear infinite;
 }
-.shadow {
-  fill: url(#shadow);
-}
 
-/*animation*/
+/* Animation */
 @keyframes mercury-group {
-	0%{
-		transform: rotate(0deg) translate(1000px);
-	}
-	100%{
-		transform: rotate(-360deg) translate(1000px);
-	}
+  0% {
+      transform: rotate(0deg) translate(1200px);
+  }
+  100% {
+      transform: rotate(-360deg) translate(1200px);
+  }
 }
 @keyframes rotation-mercury {
-	0%{
-		transform: rotate(0deg);
-	}
-	100%{
-		transform: rotate(360deg);
-	}
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
 }
+
 @keyframes venus-group {
-	0%{
-		transform: rotate(0deg) translate(2000px);
-	}
-	100%{
-		transform: rotate(-360deg) translate(2000px);
-	}
+  0% {
+      transform: rotate(0deg) translate(2400px);
+  }
+  100% {
+      transform: rotate(-360deg) translate(2400px);
+  }
 }
 @keyframes rotation-venus {
-	0%{
-		transform: rotate(0deg);
-	}
-	100%{
-		transform: rotate(360deg);
-	}
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
 }
+
 @keyframes earth-group {
-	0%{
-		transform: rotate(0deg) translate(3100px);
-	}
-	100%{
-		transform: rotate(-360deg) translate(3100px);
-	}
+  0% {
+      transform: rotate(0deg) translate(3700px);
+  }
+  100% {
+      transform: rotate(-360deg) translate(3700px);
+  }
 }
 @keyframes rotation-earth {
-	0%{
-		transform: rotate(0deg);
-	}
-	100%{
-		transform: rotate(360deg);
-	}
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
 }
+
 @keyframes moon-group {
-	0%{
-		transform: rotate(0deg) translate(500px);
-	}
-	100%{
-		transform: rotate(-360deg) translate(500px);
-	}
+  0% {
+      transform: rotate(0deg) translate(700px);
+  }
+  100% {
+      transform: rotate(-360deg) translate(700px);
+  }
 }
+
 @keyframes rotation-moon {
-	0%{
-		transform: rotate(0deg);
-	}
-	100%{
-		transform: rotate(-360deg);
-	}
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
 }
+
+
 @keyframes mars-group {
-	0%{
-		transform: rotate(0deg) translate(4100px);
-	}
-	100%{
-		transform: rotate(-360deg) translate(4100px);
-	}
+  0% {
+      transform: rotate(0deg) translate(4900px);
+  }
+  100% {
+      transform: rotate(-360deg) translate(4900px);
+  }
 }
 @keyframes rotation-mars {
-	0%{
-		transform: rotate(0deg);
-	}
-	100%{
-		transform: rotate(360deg);
-	}
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
 }
+
 @keyframes jupiter-group {
-	0%{
-		transform: rotate(0deg) translate(5500px);
-	}
-	100%{
-		transform: rotate(-360deg) translate(5500px);
-	}
+  0% {
+      transform: rotate(0deg) translate(6500px);
+  }
+  100% {
+      transform: rotate(-360deg) translate(6500px);
+  }
 }
 @keyframes rotation-jupiter {
-	0%{
-		transform: rotate(0deg);
-	}
-	100%{
-		transform: rotate(360deg);
-	}
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
 }
+
 @keyframes saturn-group {
-	0%{
-		transform: rotate(0deg) translate(8000px);
-	}
-	100%{
-		transform: rotate(-360deg) translate(8000px);
-	}
+  0% {
+      transform: rotate(0deg) translate(9000px);
+  }
+  100% {
+      transform: rotate(-360deg) translate(9000px);
+  }
 }
 @keyframes rotation-saturn {
-	0%{
-		transform: rotate(0deg);
-	}
-	100%{
-		transform: rotate(360deg);
-	}
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
 }
+
 @keyframes uranus-group {
-	0%{
-		transform: rotate(0deg) translate(10500px);
-	}
-	100%{
-		transform: rotate(-360deg) translate(10500px);
-	}
+  0% {
+      transform: rotate(0deg) translate(12000px);
+  }
+  100% {
+      transform: rotate(-360deg) translate(12000px);
+  }
 }
 @keyframes rotation-uranus {
-	0%{
-		transform: rotate(0deg);
-	}
-	100%{
-		transform: rotate(360deg);
-	}
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
 }
+
 @keyframes neptune-group {
-	0%{
-		transform: rotate(0deg) translate(12000px);
-	}
-	100%{
-		transform: rotate(-360deg) translate(12000px);
-	}
+  0% {
+      transform: rotate(0deg) translate(14000px);
+  }
+  100% {
+      transform: rotate(-360deg) translate(14000px);
+  }
 }
 @keyframes rotation-neptune {
-	0%{
-		transform: rotate(0deg);
-	}
-	100%{
-		transform: rotate(360deg);
-	}
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
 }
-/* General overlay styles */
 .overlay {
   position: fixed;
-  top: 0;
-  left: -100%;
-  width: 80%;
-  max-width: 500px;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0); /* Start with 0 scale for zoom-in effect */
+  width: 500px;
+  height: 500px; /* Default height */
+  border-radius: 50%; /* Make it circular */
   color: white;
   padding: 30px 20px;
-  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.7);
-  overflow-y: auto;
-  transition: left 0.4s ease;
+  opacity: 0; /* Start with hidden modal */
+  visibility: hidden; /* Ensure modal is not interactive when hidden */
+  transition: transform 0.4s ease, opacity 0.4s ease, visibility 0s 0.4s; /* Timing for the transition */
   font-family: 'Roboto', sans-serif; /* Modern, readable font */
+  z-index: 2; /* Ensure it's on top of background */
+}
+
+/* Planet Background Styles */
+.planet-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; /* Ensure it's circular */
+  background-size: contain; /* Ensures the background covers the entire overlay */
+  background-position: center; /* Centers the background image */
+  background-repeat: no-repeat; /* Prevents repeating the background image */
+  z-index: 1; /* Set behind the content */
 }
 
 /* Active class to show the overlay */
 .overlay.active {
-  left: 0;
+  transform: translate(-50%, -50%) scale(1); /* Zoom-in effect on showing */
+  opacity: 1; /* Fade in */
+  visibility: visible; /* Make modal interactive */
+  transition: transform 0.4s ease, opacity 0.4s ease; /* Transition for active state */
 }
+
+.overlay h2, .overlay h3, .overlay #planet-details {
+  position: relative;
+  z-index: 2; /* Ensure text is above the background */
+}
+
 
 /* Title styles */
 .overlay h2 {
@@ -360,24 +386,35 @@ svg{
   font-weight: 600;
   color: #f4c542; /* Light golden color for the title */
   text-align: center;
+  background-color: #5d4400a3;
   margin-bottom: 15px;
+  width: 80%;
+  margin: auto;
 }
 
-.overlay h3, .mjx-chtml {
+.overlay h3 {
   font-size: 1.4em;
   font-weight: 500;
-  color: #f4f4f4;
+  color: #bebebe;
+  background-color: #00000091;
+  padding: 10px;
   text-align: center;
+  margin-inline: auto;
   margin-bottom: 20px;
+  width: 80%;
 }
 
 /* Details content styling */
-.overlay #planet-details {
+.overlay #planet-details{
   font-size: 1.1em;
   line-height: 1.6;
   text-align: justify;
   color: #ddd;
+  margin: auto;
+  width: 80%;
   margin-bottom: 20px;
+  padding: 10px;
+  background-color: #00000091;
 }
 
 /* Close button styles */
@@ -386,7 +423,7 @@ svg{
   top: 20px;
   right: 20px;
   background: none;
-  color: #f4c542;
+  color: #5d4400;
   font-size: 30px;
   border: none;
   cursor: pointer;
@@ -400,7 +437,6 @@ svg{
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
   .overlay {
-      width: 90%;
       padding: 25px 15px;
   }
 
@@ -419,7 +455,8 @@ svg{
 
 @media (max-width: 480px) {
   .overlay {
-      width: 100%;
+      width: 360px;
+      height: 360px;
       padding: 20px 10px;
   }
 

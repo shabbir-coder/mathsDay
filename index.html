@@ -143,7 +143,7 @@
             </g>
         </g>
     </svg>
-    
+    <div id="rocket-cursor"></div>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -208,13 +208,52 @@
                 jupiter: {
                     name: "Magic Squares",
                     details: `
-                        <p>Ramanujan constructed a 4x4 magic square where the rows, columns, diagonals, and even the center square sum to 34.</p>
-                        <p>Example of a 4x4 magic square:</p>
-                        <p>Each row, column, and diagonal sums to 34:</p>
-                        <p>Row 1: 1 + 15 + 14 + 4 = 34</p>
-                        <p>Row 2: 12 + 6 + 7 + 9 = 34</p>
-                        <p>Row 3: 8 + 10 + 11 + 5 = 34</p>
-                        <p>Row 4: 13 + 3 + 2 + 16 = 34</p>
+                        <p>Ramanujan constructed a 4x4 magic square based on his birthdate (22 December 1887), where all rows, columns, and diagonals sum to 139:</p>
+                        <div style="display:flex">
+                        <div>
+                            <table border="1" cellspacing="0" cellpadding="10" style="text-align: center; border-collapse: collapse;">
+                                <tr>
+                                    <td>22</td>
+                                    <td>12</td>
+                                    <td>18</td>
+                                    <td>87</td>
+                                </tr>
+                                <tr>
+                                    <td>88</td>
+                                    <td>17</td>
+                                    <td>10</td>
+                                    <td>24</td>
+                                </tr>
+                                <tr>
+                                    <td>19</td>
+                                    <td>86</td>
+                                    <td>25</td>
+                                    <td>9</td>
+                                </tr>
+                                <tr>
+                                    <td>11</td>
+                                    <td>23</td>
+                                    <td>89</td>
+                                    <td>16</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <ul>
+                            <li>Verification</li>
+                            <li>Row 1: 22 + 12 + 18 + 87 = 139</li>
+                            <li>Row 2: 88 + 17 + 10 + 24 = 139</li>
+                            <li>Row 3: 19 + 86 + 25 + 9 = 139</li>
+                            <li>Row 4: 11 + 23 + 89 + 16 = 139</li>
+                        </ul>
+                        </div>
+                    
+                        <p><strong>Equation for creating a magic square:</strong></p>
+                        <ul>
+                            <li>Each cell follows a predefined arrangement rule.</li>
+                            <li>Sum for any row, column, or diagonal = \\( \\frac{n(n^2 + 1)}{2} \\).</li>
+                        </ul>
+                        <p>For the 4x4 magic square shown:</p>
+                        <p>\\( \\text{Sum} = \\frac{4(4^2 + 1)}{2} = 139 \\).</p>
                     `
                 },
                 saturn: {
@@ -238,11 +277,24 @@
 
                 },
                 neptune: {
-                    name: "Mock Theta Functions (Three-Way Function)",
+                    name: "Prime Numbers and Ramanujan's Insights",
                     details: `
-                        <p>Ramanujan introduced 17 functions that defied explanation at the time, paving the way for modern mathematics.</p>
-                        <p>Three-way functions involve transformations that operate in multiple directions and are useful in complex multi-step processes. In the case of mock theta functions, the transformation involves not just the inputs and outputs, but also intermediate steps of computation.</p>
-                        <p>For example, mock theta functions are connected to the study of q-series, where multiple transformations or 'ways' are used to relate different mathematical objects. These functions are important in modern fields like string theory, partition theory, and mathematical physics.</p>
+                        <p>Ramanujan made significant contributions to the study of prime numbers, unveiling deep patterns and connections.</p>
+                        <p>One of his key results relates to the **Prime Counting Function** \\( \\pi(x) \\), which counts the number of primes less than or equal to a given number \\( x \\).</p>
+                        <p>Ramanujan's formula for approximating \\( \\pi(x) \\):</p>
+                        <p>\\[
+                            \\pi(x) \\sim \\int_2^x \\frac{1}{\\ln(t)} dt
+                        \\]</p>
+                        <p>This integral approximation gives insight into the distribution of primes.</p>
+
+                        <p>Another important contribution was his work on **Highly Composite Numbers**, numbers with more divisors than any smaller number, which relate to the study of primes.</p>
+                        
+                        <p>Equation for generating a prime sequence using a quadratic form:</p>
+                        <p>\\[
+                            n^2 + n + 41
+                        \\]</p>
+                        <p>This produces a prime for \\( n = 0, 1, 2, \\dots, 39 \\).</p>
+
                     `
                 }
             };
@@ -292,6 +344,14 @@
             
             closeButton.addEventListener("click", () => {
                 overlay.classList.remove("active");
+            });
+
+            const rocketCursor = document.getElementById('rocket-cursor');
+
+            // Update the rocket's position on mouse move
+            document.addEventListener('mousemove', (e) => {
+                rocketCursor.style.left = `${e.clientX}px`;
+                rocketCursor.style.top = `${e.clientY}px`;
             });
         });
     </script>

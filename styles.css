@@ -408,6 +408,8 @@ svg{
   line-height: 1.6;
   text-align: justify;
   color: #ddd;
+  height: 400px;
+  overflow: auto;
   margin: auto;
   margin-bottom: 20px;
   padding: 10px;

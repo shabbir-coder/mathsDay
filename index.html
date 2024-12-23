@@ -145,7 +145,7 @@
         </g>
     </svg>
 
-    <div id="lottie-cursor"></div>
+    <!-- <div id="lottie-cursor"></div> -->
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -348,19 +348,19 @@
                 overlay.classList.remove("active");
             });
 
-            const lottieCursor = lottie.loadAnimation({
-                container: document.getElementById('lottie-cursor'), // The cursor element
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                path: 'asset/rocket.json' // Path to your Lottie JSON file
-            });
-            // Update the rocket's position on mouse move
-            document.addEventListener('mousemove', (e) => {
-                const cursor = document.getElementById('lottie-cursor');
-                cursor.style.left = `${e.clientX}px`;
-                cursor.style.top = `${e.clientY}px`;
-            });
+            // const lottieCursor = lottie.loadAnimation({
+            //     container: document.getElementById('lottie-cursor'), // The cursor element
+            //     renderer: 'svg',
+            //     loop: true,
+            //     autoplay: true,
+            //     path: 'asset/rocket.json' // Path to your Lottie JSON file
+            // });
+            // // Update the rocket's position on mouse move
+            // document.addEventListener('mousemove', (e) => {
+            //     const cursor = document.getElementById('lottie-cursor');
+            //     cursor.style.left = `${e.clientX}px`;
+            //     cursor.style.top = `${e.clientY}px`;
+            // });
         });
     </script>
 

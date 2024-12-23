@@ -10,6 +10,7 @@
 	<!-- <link rel="icon" href="icon/treedbox.png">
 	<link rel="icon" href="icon/treedbox-ani.svg"> -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
@@ -143,7 +144,8 @@
             </g>
         </g>
     </svg>
-    <!-- <div id="rocket-cursor"></div> -->
+
+    <div id="lottie-cursor"></div>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -346,12 +348,18 @@
                 overlay.classList.remove("active");
             });
 
-            const rocketCursor = document.getElementById('rocket-cursor');
-
+            const lottieCursor = lottie.loadAnimation({
+                container: document.getElementById('lottie-cursor'), // The cursor element
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'asset/rocket.json' // Path to your Lottie JSON file
+            });
             // Update the rocket's position on mouse move
             document.addEventListener('mousemove', (e) => {
-                rocketCursor.style.left = `${e.clientX}px`;
-                rocketCursor.style.top = `${e.clientY}px`;
+                const cursor = document.getElementById('lottie-cursor');
+                cursor.style.left = `${e.clientX}px`;
+                cursor.style.top = `${e.clientY}px`;
             });
         });
     </script>

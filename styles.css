@@ -482,13 +482,12 @@ svg{
   cursor: pointer;
 }
 
-#rocket-cursor {
+
+#lottie-cursor {
   position: fixed;
-  width: 50px; /* Adjust size as needed */
-  height: 50px; /* Adjust size as needed */
-  pointer-events: none;
-  background: url('asset/rocket.png') no-repeat center center;
-  background-size: contain;
-  transform: translate(-50%, -50%);
+  width: 80px; /* Adjust size as needed */
+  height: 80px; /* Adjust size as needed */
+  pointer-events: none; /* Prevent interaction issues */
+  transform: translate(-50%, -50%); /* Center the cursor */
   z-index: 9999;
 }
